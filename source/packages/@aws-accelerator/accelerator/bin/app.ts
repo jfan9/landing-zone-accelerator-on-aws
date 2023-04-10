@@ -149,6 +149,7 @@ export class AwsSolutionAspect implements cdk.IAspect {
 function addAcceleratorTags(node: IConstruct, partition: string): void {
   // Current accelerator prefix is static
   const acceleratorPrefix = 'AWSAccelerator';
+  const autodeletePrefix = 'no';
 
   // Resource types that do not support tag updates
   const excludeResourceTypes = [
@@ -165,6 +166,7 @@ function addAcceleratorTags(node: IConstruct, partition: string): void {
       }
       new cdk.Tag('Accel-P', acceleratorPrefix).visit(resource);
       new cdk.Tag('Accelerator', acceleratorPrefix).visit(resource);
+      new cdk.Tag('auto-delete', autodeletePrefix).visit(resource);
     }
   }
 }
